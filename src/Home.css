@@ -1,0 +1,16 @@
+.head{
+    background-color: #f5c332;
+    color: aliceblue;
+}
+button{
+    color: #f5c332 !important;
+    border:thin solid #f5c332 !important;
+}
+
+.btnn{
+    background-color: #f5c332 !important;
+    color: aliceblue !important;
+}
+svg{
+    fill: #f5c332;
+}

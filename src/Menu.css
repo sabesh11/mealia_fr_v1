@@ -1,0 +1,60 @@
+.sb-breadcrumbs {
+    border: 2px solid #fff;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    background-color: #f5c332;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0 20px;
+    height: 55px;
+    transition: .3s ease-in-out;
+    list-style: none;
+    text-decoration: none;
+}
+.sb-breadcrumbs li a {
+    padding: 0 10px;
+    opacity: .4;
+    transition: .3s ease-in-out;
+}
+
+.sb-breadcrumbs li:last-child a {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sb-breadcrumbs a:after {
+    content: "/";
+    left: 20px;
+    color: black;
+}
+
+.title {
+    background-color: #f9fafc;
+}
+h1 {
+    line-height: 110%;
+    letter-spacing: -1px;
+    color: black;
+}
+.btn {
+    background-color: #f5c332;
+    border: thin solid #f5c332;
+    text-align: center;
+    width: 100%;
+}
+
+button:hover {
+    background-color: transparent;
+    color: #f5c332;
+    border: thin solid #f5c332;
+
+}
+
