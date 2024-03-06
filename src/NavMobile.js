@@ -1,5 +1,9 @@
 import React from "react";
-import "./NavMobile.css"
+import "./NavMobile.css";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const NavMobile = () =>{
     return(
@@ -80,6 +84,59 @@ const NavMobile = () =>{
     </div>
 
 </nav>
+{/* <Navbar expand="lg" className="bg-body-tertiary">
+      <Container>
+     
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <div className=""><Navbar.Brand href="#home"  className="  d-flex justify-content-center">
+            React-Bootstrap</Navbar.Brand></div> 
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto ">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#link">Link</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+        <Nav className="me-auto ">
+        <ul class=" d-flex  align-content-center  me-2" style={{liststyle: "none"}}>
+          
+            <li class="li ">
+                <a class="" href="#">
+                    <slot></slot>
+                  
+
+                </a>
+            </li>
+
+            <li class="li ">
+                <a class="" href="#" >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="v-icon__svg" style={{width: "22px", height: "22px"}}>
+                        <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,
+                4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"></path>
+                    </svg></a>
+            </li>
+            <li class="li ">
+
+                <a class="" href="#"><svg xmlns="http://www.w3.org/2000/svg" style={{width: "22px", height: "22px"}} fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                    </svg></a>
+            </li>
+
+        </ul>
+           
+          </Nav>
+      </Container>
+    </Navbar> */}
         </div>
     )
 }

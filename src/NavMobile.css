@@ -1,5 +1,5 @@
 .navbar {
-    background-color:  #f5c332;
+    background-image: linear-gradient( 68.3deg,  rgba(245,177,97,1) 0.4%, rgba(236,54,110,1) 100.2% );
     color: aliceblue;
 }
 
@@ -49,7 +49,7 @@ svg {
         line-height: 16px;
         display: block;
         text-align: center;
-        color:  #f5c332;
+        color:  rgba(236,54,110,1);
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
     }

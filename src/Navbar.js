@@ -1,10 +1,19 @@
 import React from "react";
-import './Navbar.css'
+import './Navbar.css';
+import { useState } from 'react';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
-const Navbar =() =>{
+   
+
+const Navbar =({count}) =>{
+    const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 return(
     <div>
-<div class="container-fluid d-lg-flex justify-content-between d-none pt-2">
+<div class="container-fluid d-lg-flex justify-content-between d-none pt-2 cc">
     <div class="row mt-2 ms-2">
         <a>
             <svg viewBox="0 0 24 24" class="icon-white   navbar-brand" style={{width: "35px", height:"35px"}}>
@@ -36,53 +45,28 @@ return(
 
             <li class="li ">
 
-                <a class="" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                <a class="" href="#" 
+                onClick={handleShow} >
 
-                    <slot></slot>
+                <div class="cart align-self-center ">
+        <span class="count">{count}</span>
+
+        <svg xmlns="http://www.w3.org/2000/svg" style={{width: "22px",height: "22px",fill:"white"}} fill="" class="bi bi-cart3 material-icons" viewBox="0 0 16 16" >
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+        </svg>
+    </div>
 
                 </a>
 
-                <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                    <div class="offcanvas-header">
-                        <h5 id="offcanvasTopLabel">Your Order.</h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <h3></h3>
-
-                        <div class="card text-dark bg-light mb-3 " style={{maxwidth: "540px",}} >
-                            <div class="row g-0 justify-content-center ">
-                                <div class="col-md-4">
-                                    <img src="" class="img-fluid rounded-start" alt="..." />
-                                </div>
-                                <div class="col-md-8  d-flex">
-                                    <div class="card-body ">
-                                        <h5 class="card-title"></h5>
-                                      
-
-                                    </div>
-                                    <div className="card-footer pt-4" style={{backgroundcolor:" #f5c332"}}
-                                        ><h5></h5></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div  className=" offcanvas-footer  text-dark p-3 shadow ">
-                        <div class="container-fluid bg-body   ">
-                            <div class="row justify-content-around ">
-                                <div class="col-md-5 text-center ">
-                                    <button type="button" class="btn btn-outline-warning p-3" aria-label="Close"
-                                    data-bs-dismiss="offcanvas">View Order</button>
-                                </div>
-                                <div class="col-md-5 text-center">
-                                    <button type="button" class="btn btn-warning p-3" aria-label="Close" data-bs-dismiss="offcanvas"
-                                  >Checkout</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
             </li>
 
             <li class="li ">

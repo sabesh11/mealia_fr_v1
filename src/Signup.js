@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 function Signup() {
+  const navigate = useNavigate();
  const [SignupData, setData]=useState({
     name:"",
     email:"",
@@ -33,7 +37,14 @@ function Signup() {
         },
         body: JSON.stringify(sgnData),
 
-  }).then((res)=>console.log(res))
+  }).then((res)=>res.json())
+  .then(data => {
+    localStorage.setItem("userName",data.name);
+    localStorage.setItem("userId",data.id);
+    localStorage.setItem("usermail",data.email);
+
+  })
+  navigate("/menu")
     }
     return (
         <div>
