@@ -3,6 +3,8 @@ import { React } from "react";
 
 import Home from "./Home";
 import Menu from "./Menu";
+import Admin from "./Admin";
+
 
 
 function App() {
@@ -14,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}>    </Route>
         <Route path="/menu" element={<Menu />}>     </Route>
-         
+        <Route path="/admin" element={<Admin />}>     </Route>    
+       
     
       </Routes>
     </BrowserRouter>
