@@ -2,10 +2,12 @@ import React from "react";
 import './Navbar.css';
 import { useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { Link, useNavigate } from 'react-router-dom';
 
    
 
 const Navbar =({changePage,count,cart}) =>{
+    const navigate = useNavigate();
     const [show, setShow] = useState(false);
    
   
@@ -13,7 +15,11 @@ const Navbar =({changePage,count,cart}) =>{
   const handleShow = () => setShow(true);
   let userId= localStorage.getItem("userID");
 
-  
+  const logout =() =>{
+    navigate('/')
+    localStorage.removeItem('userID')
+    localStorage.removeItem('userName')
+  }
    
 
   
@@ -100,7 +106,9 @@ return(
                                 </div>
                                 <div class="col-md-5 text-center">
                                     <button type="button" class="btn  p-3 text-white " aria-label="Close" data-bs-dismiss="offcanvas"
-                                  style={{
+                                  onClick={()=>{
+                                    navigate("/checkout")
+                                }}style={{
                                     backgroundImage: "linear-gradient(68.3deg, rgba(245, 177, 97, 1) 0.4%, rgba(236, 54, 110, 1) 100.2%)", }}
                                    >Checkout</button>
                                 </div>
@@ -111,7 +119,7 @@ return(
             </li>
 
             <li class="li ">
-                <a class="" href="/">
+                <a class="" href="" onClick={logout()}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="v-icon__svg" style={{width: "22px", height: "22px"}} >
                         <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,
                 4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"></path>

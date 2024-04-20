@@ -39,8 +39,9 @@ function Signup() {
 
   }).then((res)=>res.json())
   .then(data => {
+    console.log("API Response:", data);
     localStorage.setItem("userName",data.name);
-    localStorage.setItem("userId",data.id);
+    localStorage.setItem("userID",data.id);
     localStorage.setItem("usermail",data.email);
 
   })

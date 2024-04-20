@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
 import { Link, useNavigate } from 'react-router-dom';
 
 
 function Signin() {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
   const [SigninData, setData] = useState({
     name: "",
 
@@ -32,6 +33,7 @@ function Signin() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(sgnData),
     })
@@ -42,7 +44,11 @@ function Signin() {
         if (data != null) {
           localStorage.setItem("userID", data.id);
           localStorage.setItem("userName", data.name);
+          const token = data.token;
+          // Store the token securely, e.g., in localStorage
+          localStorage.setItem('token', token);
           navigate("/menu");
+          
         } else {
           console.log("Failed to fetch data");
         }
@@ -51,9 +57,11 @@ function Signin() {
     let nwarning = document.getElementById("nameWarning");
     let pwarning = document.getElementById("passwarning");
 
-    if (SigninData.name == '' || SigninData.name == null) {
+    if (SigninData.name == '' || SigninData.name == null ) {
       nwarning.innerHTML = "Enter your Name";
       nwarning.style.color = "red";
+      pwarning.innerHTML = "Enter Password";
+      pwarning.style.color = "red";
     } else if (SigninData.password == '' || SigninData.password == null) {
       pwarning.innerHTML = "Enter Password";
       pwarning.style.color = "red";
