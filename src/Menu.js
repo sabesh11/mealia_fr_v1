@@ -12,23 +12,25 @@ function Menu() {
     const [foodslist, setfood] = useState([]);
     const [cart, addCart] = useState([])
     const [priceTotal, setPriceTotal] = useState(0);
-    const [pricelist,setPrice] =useState([])
+    const [pricelist, setPrice] = useState([])
     const [count, setCount] = useState(0);
     const [result, setResult] = useState(true)
     const [searchItem, setSearchItem] = useState('')
     const [disabledButtons, setDisabledButtons] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalCart,addModalCart] = useState([])
     // const [filteredfood, setFilteredUsers] = useState(foodslist)
     let userId = localStorage.getItem("userID");
-    let token=localStorage.getItem("token")
+    let token = localStorage.getItem("token")
     console.log(userId);
-    
+
 
     //use effect for data rendering
     useEffect(() => {
         return () => {
-            fetch("http://localhost:7070/food/getfood",{
-                headers: {'Authorization': `Bearer ${token}`, },
-              })
+            fetch("http://localhost:7070/food/getfood", {
+                headers: { 'Authorization': `Bearer ${token}`, },
+            })
                 .then((response) => {
                     return response.json()
                 })
@@ -41,26 +43,26 @@ function Menu() {
     }, [])
 
     //function for cart item rendering
-    function cartfunc(){
+    function cartfunc() {
 
-        axios.get(`http://localhost:7070/food/getcart/${userId}`,{
+        axios.get(`http://localhost:7070/food/getcart/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
-          })
-        .then((res)=>{
-            console.log("===Res===",res.data);
-            addCart(res.data);
-            setCount(res.data.length)
         })
-        .catch((err)=>{
+            .then((res) => {
+                console.log("===Res===", res.data);
+                addCart(res.data);
+                setCount(res.data.length)
+            })
+            .catch((err) => {
 
-        })
+            })
     }
 
     // const handleInputChange = (e) => {
     //     const searchTerm = e.target.value;
     //     setSearchItem(searchTerm)
 
-          
+
 
     // }
     // const filteredItems = foodslist.filter((food) =>
@@ -74,7 +76,7 @@ function Menu() {
     }
 
     //onclick func for cart adding
-    const addtocart = (food,index) => {
+    const addtocart = (food, index) => {
         food.quantity++
         console.log("quantity=========", food.quantity);
         let add = {
@@ -86,8 +88,10 @@ function Menu() {
 
 
         }
+        addModalCart(add)
         cart.push(add);
         setCount(cart.length);
+        setShowModal(!showModal);
 
         //for cart data store in DB 
         fetch(`http://localhost:7070/User/addcart/${userId}`,
@@ -108,7 +112,7 @@ function Menu() {
         console.log(pricelist);
         setPriceTotal(priceTotal => priceTotal + parseInt(pricelist[pricelist.length - 1]));
         console.log("Totalprice====================================", priceTotal);
-        localStorage.setItem("total",priceTotal);
+        localStorage.setItem("total", priceTotal);
         const updatedDisabledButtons = [...disabledButtons];
         updatedDisabledButtons[index] = true;
         setDisabledButtons(updatedDisabledButtons);
@@ -141,7 +145,7 @@ function Menu() {
                             </div>
                             <div className="col-md-5   mt-2 text-lg-end text-center  text-white ">
                                 <ul className="sb-breadcrumbs">
-                                    <li><a href="/">Home</a></li>
+                                    <li><a >Home</a></li>
 
                                     <li>Menu</li>
                                 </ul>
@@ -154,10 +158,10 @@ function Menu() {
                                 <a className="d-flex text-black-50 " onClick={changeResult}><i className="bi bi-search"></i>&nbsp;Results</a> </div> :
                                 <div className="col-md-12 col-11" >
                                     <input className="form-control  border border-dark " type="search" placeholder="search food" value={searchItem}
-                                    //    onChange={handleInputChange}
+                                        //    onChange={handleInputChange}
                                         id="example-search-input" />
                                 </div>}
-  {/* <input className="form-control  border border-dark " type="search" placeholder="search food" value={searchItem}
+                            {/* <input className="form-control  border border-dark " type="search" placeholder="search food" value={searchItem}
                                         onChange={handleInputChange}
                                         id="example-search-input" /> */}
 
@@ -171,7 +175,7 @@ function Menu() {
                     </div>
                     <div className="container ">
                         <div className="row justify-content-around">
-                            {Array.isArray(foodslist) && foodslist.map((food,index) => (
+                            {Array.isArray(foodslist) && foodslist.map((food, index) => (
                                 <div className="col-md-3 card mt-5" style={{ width: "20rem" }} >
                                     <img src={food.img} className="card-img-top img-fluid " alt="..." />
                                     <div className="card-body">
@@ -185,17 +189,48 @@ function Menu() {
                                         </div>
                                         <p className="card-text text-center">price: ${food.price}</p>
 
-                                        <button className="btnn btn" type="button" id="btn" disabled={disabledButtons[index]}
-                                            onClick={() => addtocart(food,index)} >Add to cart</button>
+                                        <button className="btnn btn" type="button" id="btn" disabled={disabledButtons[index]} 
+                                            onClick={() => addtocart(food, index)} >Add to cart</button>
 
                                     </div>
                                 </div>
                             ))}
                         </div>
+                        {showModal && (
+        <div className="modal fade show" tabIndex="-1" style={{ display: 'inline' }} >
+          <div className="modal-dialog modal-dialog-bottom-right ms-4 translate-effect">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Successfully added</h5>
+                <button type="button" className="btn-close" onClick={()=>{
+                    setShowModal(!showModal);
+                }}></button>
+              </div>
+              <div className="modal-body">
+              <div className="card  mb-3 border-0" style={{ maxWidth: "300px", }}>
+                                    <div className="row g-0  ">
+                                        <div className="col-md-4">
+                                            <img src={modalCart.img} className="img-fluid rounded-start" alt="..."></img>
+                                        </div>
+                                        <div className="col-md-8  d-flex">
+                                            <div className="card-body ">
+                                                <h5 className="card-title">{modalCart.food} </h5>
+                                                <p>1 x ${modalCart.price}</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      )}
                     </div>
 
                 </div>
-                : <Order  Total={priceTotal} menPage={menPage}/>}
+                : <Order Total={priceTotal} menPage={menPage} />}
         </div>
     )
 }

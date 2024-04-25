@@ -19,6 +19,7 @@ const Navbar =({changePage,count,cart}) =>{
     navigate('/')
     localStorage.removeItem('userID')
     localStorage.removeItem('userName')
+    localStorage.removeItem('usermail')
   }
    
 
@@ -27,7 +28,7 @@ const Navbar =({changePage,count,cart}) =>{
 //  
 return(
     <div>
-<div className="container-fluid d-lg-flex justify-content-between d-none pt-2 cc">
+<div className="container-fluid d-lg-flex justify-content-between d-none pt-2 cc ">
     <div className="row mt-2 ms-2">
         <a>
             <svg viewBox="0 0 24 24" className="icon-white   navbar-brand" style={{width: "35px", height:"35px"}}>
@@ -74,7 +75,7 @@ return(
 
                 <Offcanvas show={show} onHide={handleClose}  placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Cartlist</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
         {Array.isArray(cart) && cart.map(cartlist =>(<div className="card text-dark bg-light mb-3 " style={{maxwidth: "540px"}} >
@@ -119,7 +120,7 @@ return(
             </li>
 
             <li class="li ">
-                <a class="" href="" onClick={logout()}>
+                <a class="" href="" onClick={logout}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="v-icon__svg" style={{width: "22px", height: "22px"}} >
                         <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,
                 4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"></path>
