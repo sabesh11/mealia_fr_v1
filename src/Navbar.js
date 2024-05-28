@@ -103,7 +103,7 @@ return(
                             <div class="row justify-content-around ">
                                 <div class="col-md-5 text-center ">
                                     <button type="button" class="btn  p-3" aria-label="Close"
-                                    data-bs-dismiss="offcanvas" onClick={changePage}>View Order</button>
+                                    data-bs-dismiss="offcanvas" onClick={() => { changePage(); setShow(false); }}>View Order</button>
                                 </div>
                                 <div class="col-md-5 text-center">
                                     <button type="button" class="btn  p-3 text-white " aria-label="Close" data-bs-dismiss="offcanvas"

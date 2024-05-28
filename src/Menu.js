@@ -1,4 +1,5 @@
 import React, { useEffect, useState, } from "react"
+import { CSSTransition } from 'react-transition-group';
 import Navbar from "./Navbar"
 import NavMobile from "./NavMobile"
 import './Menu.css'
@@ -39,9 +40,22 @@ function Menu() {
                     console.log(data);
                 })
             cartfunc();
-        }
+           // Clear any existing timeout
+        } 
     }, [])
 
+    useEffect(() => {
+        let timeoutId; // Declare timeoutId inside useEffect
+      
+        if (showModal) {
+          timeoutId = setTimeout(() => {
+            setShowModal(false);
+          }, 5000); // 10 seconds in milliseconds
+        }
+      
+        return () => clearTimeout(timeoutId);
+      }, [showModal]);
+      
     //function for cart item rendering
     function cartfunc() {
 
@@ -131,6 +145,8 @@ function Menu() {
         changeMenupage(true)
     }
 
+   
+
     return (
         <div>
 
@@ -190,14 +206,20 @@ function Menu() {
                                         <p className="card-text text-center">price: ${food.price}</p>
 
                                         <button className="btnn btn" type="button" id="btn" disabled={disabledButtons[index]} 
-                                            onClick={() => addtocart(food, index)} >Add to cart</button>
+                                            onClick={() => addtocart(food, index)} > {disabledButtons[index] ? 'Added' : 'Add to cart'}</button>
 
                                     </div>
                                 </div>
                             ))}
                         </div>
                         {showModal && (
-        <div className="modal fade show" tabIndex="-1" style={{ display: 'inline' }} >
+                            <CSSTransition
+                            in={showModal} // Controlled by showModal state
+                            timeout={300} // Transition duration in milliseconds (default 300)
+                            classNames="modal" // Base class for modal
+                            unmountOnExit // Unmount the modal after exiting
+                          >
+        <div className="modal fade show" tabIndex="-1" style={{ display: 'block' }} >
           <div className="modal-dialog modal-dialog-bottom-right ms-4 translate-effect">
             <div className="modal-content">
               <div className="modal-header">
@@ -226,6 +248,7 @@ function Menu() {
             </div>
           </div>
         </div>
+        </CSSTransition>
       )}
                     </div>
 

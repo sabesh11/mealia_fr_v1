@@ -60,3 +60,21 @@ a {
 .bi-cart3{
     fill: white !important;
 }
+
+.modal-enter {
+    opacity: 0 !important; /* Starting state for entering animation */
+  }
+  
+  .modal-enter-active {
+    opacity: 1; /* Ending state for entering animation */
+    transition: opacity 0.3s ease-in-out !important; /* Animation details */
+  }
+  
+  .modal-exit {
+    opacity: 1 !important; /* Starting state for exiting animation */
+  }
+  
+  .modal-exit-active {
+    opacity: 0; /* Ending state for exiting animation */
+    transition: opacity 0.3s ease-in-out !important; /* Animation details */
+  }
