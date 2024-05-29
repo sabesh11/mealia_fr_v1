@@ -7,9 +7,9 @@ function Signin() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [SigninData, setData] = useState({
-    name: "",
+    name: null,
 
-    password: "",
+    password: null,
 
   })
 

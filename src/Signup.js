@@ -7,10 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 function Signup() {
   const navigate = useNavigate();
  const [SignupData, setData]=useState({
-    name:"",
-    email:"",
-    password:"",
-    cpassword:"",
+    name:null,
+    email:null,
+    password:null,
+    cpassword:null,
   })
   
    const handleChange =(event)=>{
