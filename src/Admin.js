@@ -171,10 +171,52 @@ const Admin = () => {
                                             <td className="p-4">{cart.price}</td>
                                             <td className="p-4">{cart.total}</td>
                                             <td className="p-4">
-                                                <button type="button" className="btn border-0 " onClick={() => deleteCart(cart.id,index)}>
-                                                    <i className="bi bi-trash3"></i></button>
+                                               
                                                 <button type="button" className="btn border-0 ">
                                                     <i className="bi bi-pencil-square"></i></button></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+
+                            </table>
+                        </Tab>
+                        <Tab eventKey="delete" title="DELETE FOODS">
+                            <table className="table mt-5">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Products</th>
+                                       
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    {Array.isArray(foodslist) && foodslist.map((cart, index) => (
+                                        <tr  >
+                                            <td scope="row">
+                                                <div className="card  mb-3 border-0" style={{ maxWidth: "200px", }}>
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                            <img src={cart.img} className="img-fluid rounded-start" ></img>
+                                                        </div>
+                                                        <div className="col-md-8  d-flex">
+                                                            <div className="card-body ">
+                                                                <h5 className="card-title">{cart.food} </h5>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                           
+                                            <td className="p-4">{cart.price}</td>
+                                            <td className="p-4">{cart.total}</td>
+                                            <td className="p-4">
+                                                <button type="button" className="btn border-0 " onClick={() => deleteCart(cart.id,index)}>
+                                                    <i className="bi bi-trash3"></i></button>
+                                                </td>
                                         </tr>
                                     ))}
                                 </tbody>

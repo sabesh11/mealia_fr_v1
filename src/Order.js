@@ -4,56 +4,61 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-const Order = ({  Total, menPage, }) => {
+const Order = ({ Total, menPage, }) => {
     const navigate = useNavigate();
     let userId = localStorage.getItem("userID");
 
     const [quantity, setQuantity] = useState();
     const [newValue, setNewvalue] = useState();
-    const[total,setTotal] = useState(Total)
+    const [total, setTotal] = useState(Total)
+
 
     useEffect(() => {
         cartfunc();
     }, []);
-    function cartfunc(){
+
+    const cartfunc = () => {
 
         axios.get(`http://localhost:7070/food/getcart/${userId}`)
-        .then((res)=>{
-            console.log("===Res===",res.data);
-            setQuantity(res.data);
-        })
-        .catch((err)=>{
+            .then((res) => {
+                console.log("===Res===", res.data);
+                setQuantity(res.data);
+            })
+            .catch((err) => {
 
-        })
-    }
+            })
+    };
 
 
-console.log("total",total);
-    function incQuantity(ind) {
+    console.log("total", total);
+
+    const incQuantity = ind => {
         quantity[ind].quantity += 1
         let quant = quantity[ind].quantity;
         console.log("increaseQuantiy================", quant)
         setNewvalue(quant)
         quantity[ind].total += quantity[ind].price
-        
-        
-        setTotal(total+quantity[ind].price)
-        console.log("update total",total);
+
+
+        setTotal(total + quantity[ind].price)
+        console.log("update total", total);
+        localStorage.setItem("totalprice", total)
         // setQuantity(quantity[ind].quantity)
 
         // setQuantity(cartlist[ind].quantity);
         // console.log( cartlist[ind].quantity);
-    }
+    };
 
-    function decQuantity(ind) {
+    const decQuantity = ind => {
         quantity[ind].quantity -= 1;
         console.log("decreaseQuantity========", quantity[ind].quantity);
         setNewvalue(quantity[ind].quantity)
         quantity[ind].total = quantity[ind].total - quantity[ind].price
-        setTotal(total-quantity[ind].price)
+        setTotal(total - quantity[ind].price)
+        localStorage.setItem("totalprice", total)
         // console.log(quantity[ind].total);
 
-    }
+    };
 
 
 
@@ -63,7 +68,7 @@ console.log("total",total);
 
         axios.get(`http://localhost:7070/food/deletecart/${userId}/${id}`)
             .then((res) => {
-                
+
                 // quantity.splice(i, 1);
                 cartfunc();
                 console.log(quantity);
@@ -116,7 +121,7 @@ console.log("total",total);
                     </tr>
                 </thead>
                 <tbody >
-                    {Array.isArray(quantity) &&  quantity.map((cart, index) => (
+                    {Array.isArray(quantity) && quantity.map((cart, index) => (
                         <tr  >
                             <td scope="row">
                                 <div className="card  mb-3 border-0" style={{ maxWidth: "300px", }}>
@@ -147,7 +152,7 @@ console.log("total",total);
                                 <button type="button" className="btn border-0 " onClick={() => deleteCart(cart.id, index)}>
                                     <i className="bi bi-trash3"></i></button></td>
                         </tr>
-                    )) }
+                    ))}
                 </tbody>
 
             </table>
@@ -169,7 +174,7 @@ console.log("total",total);
                                     </svg> &nbsp;&nbsp;Continue Shopping</button>
                             </div>
                             <div className="col-md-5 text-center mt-2">
-                                <button type="button" className="btn  p-3 text-white" onClick={()=>{
+                                <button type="button" className="btn  p-3 text-white" onClick={() => {
                                     navigate("/checkout")
                                 }}
                                     style={{

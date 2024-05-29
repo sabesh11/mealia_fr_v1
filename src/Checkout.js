@@ -7,9 +7,9 @@ import axios from 'axios';
 const Checkout = () =>{
     let userId = localStorage.getItem("userID");
     const [cart, addCart] = useState([])
-    
-  
-    function cartfunc(){
+
+
+    const cartfunc = () => {
 
         axios.get(`http://localhost:7070/food/getcart/${userId}`)
         .then((res)=>{
@@ -19,7 +19,8 @@ const Checkout = () =>{
         .catch((err)=>{
 
         })
-    }
+    };
+
     useEffect(() => {
         cartfunc();
     }, []);

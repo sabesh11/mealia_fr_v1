@@ -55,9 +55,9 @@ function Menu() {
       
         return () => clearTimeout(timeoutId);
       }, [showModal]);
-      
+
     //function for cart item rendering
-    function cartfunc() {
+    const cartfunc = () => {
 
         axios.get(`http://localhost:7070/food/getcart/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -70,7 +70,7 @@ function Menu() {
             .catch((err) => {
 
             })
-    }
+    };
 
     // const handleInputChange = (e) => {
     //     const searchTerm = e.target.value;
@@ -145,7 +145,7 @@ function Menu() {
         changeMenupage(true)
     }
 
-   
+
 
     return (
         <div>
