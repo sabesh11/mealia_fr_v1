@@ -3,12 +3,48 @@ import Navbar from "./Navbar"
 import NavMobile from "./NavMobile"
 import './Checkout.css'
 import axios from 'axios';
+import { useCallback } from "react";
+import useRazorpay from "react-razorpay";
 
 const Checkout = () =>{
     let userId = localStorage.getItem("userID");
     const [cart, addCart] = useState([])
+    
+    const [Razorpay] = useRazorpay();
 
+    const handlePayment = useCallback(async () => { // Mark the function as async
+    //   const order = await createOrder(params);
+  
+      const options = {
+        key: "YOUR_KEY_ID",
+        amount: "3000",
+        currency: "INR",
+        name: "Acme Corp",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: "asdfghj",
+        handler: (res) => {
+          console.log(res);
+        },
+        prefill: {
+          name: "Piyush Garg",
+          email: "youremail@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+  
+      const rzpay = new Razorpay(options);
+      rzpay.open();
+    }, [Razorpay]);
+  
 
+  
     const cartfunc = () => {
 
         axios.get(`http://localhost:7070/food/getcart/${userId}`)
@@ -44,7 +80,7 @@ const Checkout = () =>{
 </div>
 <div class="container-fluid">
     <div class="row mt-5 justify-content-around ">
-        <div class="col-md-7 card p-4 border-0 shadow mt-5">
+        <div class="col-md-7 card p-4 border-0 shadow mt-5 order-md-1 order-2">
             <div class="row">
                <h3>Billing details.</h3> 
             </div>
@@ -108,7 +144,7 @@ const Checkout = () =>{
                 <div class="col-12 mt-3">
                     <div class="col-md-5  mt-2">
                                     <button type="button" class="btn  p-2" aria-label="Close" data-bs-dismiss="offcanvas"
-                                    ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-left-circle" viewBox="0 0 16 16">
+                                    onClick={handlePayment}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-left-circle" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-5.904 2.803a.5.5 0 1 0 .707-.707L6.707 6h2.768a.5.5 0 1 0 0-1H5.5a.5.5 0 0 0-.5.5v3.975a.5.5 0 0 0 1 0V6.707z"/>
 </svg>&nbsp; Place order</button>
                                 
@@ -116,8 +152,8 @@ const Checkout = () =>{
                 </div>
             </form>
         </div>
-        <div class="col-md-4 mt-5 ">
-            <table class="table table-secondary ">
+        <div class="col-md-4 mt-5 order-md-2 order-1 ">
+            <table class="table table-secondary">
   <thead>
     <tr class="p-5">
       

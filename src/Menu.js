@@ -4,6 +4,9 @@ import Navbar from "./Navbar"
 import NavMobile from "./NavMobile"
 import './Menu.css'
 import axios from 'axios';
+import { Collapse } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import CardFooter from "react-bootstrap";
 
 
 import Order from "./Order"
@@ -18,7 +21,7 @@ function Menu() {
     const [result, setResult] = useState(true)
     const [searchItem, setSearchItem] = useState('')
     const [disabledButtons, setDisabledButtons] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [open, setOpen] = useState(false);
     const [modalCart,addModalCart] = useState([])
     // const [filteredfood, setFilteredUsers] = useState(foodslist)
     let userId = localStorage.getItem("userID");
@@ -47,14 +50,14 @@ function Menu() {
     useEffect(() => {
         let timeoutId; // Declare timeoutId inside useEffect
       
-        if (showModal) {
+        if (open) {
           timeoutId = setTimeout(() => {
-            setShowModal(false);
+            setOpen(false);
           }, 5000); // 10 seconds in milliseconds
         }
       
         return () => clearTimeout(timeoutId);
-      }, [showModal]);
+      }, [open]);
 
     //function for cart item rendering
     const cartfunc = () => {
@@ -105,7 +108,7 @@ function Menu() {
         addModalCart(add)
         cart.push(add);
         setCount(cart.length);
-        setShowModal(!showModal);
+        setOpen(!open);
 
         //for cart data store in DB 
         fetch(`http://localhost:7070/User/addcart/${userId}`,
@@ -212,25 +215,12 @@ function Menu() {
                                 </div>
                             ))}
                         </div>
-                        {showModal && (
-                            <CSSTransition
-                            in={showModal} // Controlled by showModal state
-                            timeout={300} // Transition duration in milliseconds (default 300)
-                            classNames="modal" // Base class for modal
-                            unmountOnExit // Unmount the modal after exiting
-                          >
-        <div className="modal fade show" tabIndex="-1" style={{ display: 'block' }} >
-          <div className="modal-dialog modal-dialog-bottom-right ms-4 translate-effect">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Successfully added</h5>
-                <button type="button" className="btn-close" onClick={()=>{
-                    setShowModal(!showModal);
-                }}></button>
-              </div>
-              <div className="modal-body">
-              <div className="card  mb-3 border-0" style={{ maxWidth: "300px", }}>
-                                    <div className="row g-0  ">
+                        {open && (
+                            <div style={{ minHeight: '150px',marginTop:'100px' }}>
+                            <Collapse in={open} dimension="width">
+                              <div id="example-collapse-text">
+                                <Card body style={{ width: '400px' }}>
+                                <div className="row g-0  ">
                                         <div className="col-md-4">
                                             <img src={modalCart.img} className="img-fluid rounded-start" alt="..."></img>
                                         </div>
@@ -242,15 +232,13 @@ function Menu() {
 
                                         </div>
                                     </div>
-                                </div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        </CSSTransition>
+                                </Card>
+                              </div>
+                            </Collapse>
+                          </div>
       )}
                     </div>
+                    
 
                 </div>
                 : <Order Total={priceTotal} menPage={menPage} />}
