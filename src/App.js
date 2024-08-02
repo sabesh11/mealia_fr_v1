@@ -14,10 +14,10 @@ function App() {
   <div>
   <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}>    </Route>
-   <Route path="/menu" element={<Menu />}>     </Route>
-        <Route path="/admin" element={<Admin />}>     </Route> 
-        <Route path="/checkout" element={<Checkout />}>     </Route>    
+        <Route path="/" element={<Home />}>   </Route>
+        <Route path="/menu" element={<Menu />}>  </Route>
+        <Route path="/admin" element={<Admin />}>    </Route> 
+        <Route path="/checkout" element={<Checkout />}>   </Route>    
        
     
       </Routes>

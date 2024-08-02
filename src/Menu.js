@@ -160,7 +160,7 @@ function Menu() {
                     <div className="container-fluid  title p-5">
                         <div className="row justify-content-between mt-5 ">
                             <div className="col-md-5  mt-2 text-lg-start text-center">
-                                <h1 style={{ color: "black" }}>Mealie menu.</h1>
+                                <h1 style={{ color: "black" }}>Mealie meenu.</h1>
                             </div>
                             <div className="col-md-5   mt-2 text-lg-end text-center  text-white ">
                                 <ul className="sb-breadcrumbs">
